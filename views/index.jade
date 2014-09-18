@@ -1,0 +1,71 @@
+extends layout
+
+block content
+	div.content
+		h3.title Foosball Rankings
+		div.content-rankings.clear
+			div.leaderboard
+				ol
+					-each result in results
+						li.result.clear
+							div.text-left.name
+								span=result._id
+							div.text-left
+								span=result.count
+			div.add-new-game
+				button(name="addgame", id="addgame") Add New Game
+				#foosball-form
+					form(action="#", method="post")
+						div.clear
+							input(type="text",id="player1-name",class="text-left",placeholder="Player 1")
+							input(type="text",id="player1-score",class="text-left",placeholder="Score")
+						div.clear
+							input(type="text",id="player2-name",class="text-left",placeholder="Player 2")
+							input(type="text",id="player2-score",class="text-left",placeholder="Score")
+						input(type="submit",value="Submit",id="submit-button")
+				a(href="javascript:void(0);", id="edit-games") Edit Games
+				ul.game-list
+		
+
+	script.
+		$(document).ready(function(){
+			$("#foosball-form").hide();
+			
+			$("#addgame").click(function(){
+				$("#foosball-form").show();
+			});
+
+			$("#edit-games").click(function(e){
+				e.preventDefault();
+				$.getJSON("/getResults", function(results){
+					console.log('result: ' + JSON.stringify(results));
+					for (var result in results){
+						var listEl = document.createElement("li");
+						listEl.id = results[result]._id;
+						$(listEl).append("<div><span>Player 1: <span></span>" + results[result].player1 + "</span><span>Score:</span><input type='text' value='" + results[result].score1 + "' /></div>");
+										 .append("<div><span>Player 2: <span></span>" + results[result].player2 + "</span><span>Score:</span><input type='text' value='" + results[result].score2 + "' /></div>")
+						$(".game-list").append(listEl);
+					}
+				});
+			});
+
+			$("form").submit(function(e){
+				e.preventDefault();
+				var result = {
+					player1: $("#player1-name").val(),
+					player2: $("#player2-name").val(),
+					score1: parseInt($("#player1-score").val()),
+					score2: parseInt($("#player2-score").val())
+				};
+				$.ajax({
+					url:'/addResult',
+					method:'POST',
+					dataType:'json',
+					data: result,
+					success: function(data){
+						window.location.reload();
+					} 
+				});
+			});
+		});
+

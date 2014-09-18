@@ -1,0 +1,16 @@
+<div class="bg-success leaderboard-content" ng-controller="LeaderboardCtrl">
+	<div class="clearfix">
+		<div class="pull-left item-index"><strong>Rank</strong></div>
+		<div class="pull-left item-name"><strong>Name</strong></div>
+		<div class="pull-left item-count"><strong>Games Won</strong></div>
+	</div>
+	<ul ng-repeat="item in rankings">
+		<li>
+			<div class="leaderboard-item clearfix">
+				<div class="pull-left item-index">{{ $index + 1 }}.</div>
+				<div class="pull-left item-name">{{ item._id }}</div>
+				<div class="pull-left item-count">{{ item.count }}</div>
+			</div>
+		</li>
+	</ul>
+</div>

@@ -1,0 +1,46 @@
+<div class="bg-success leaderboard-content" ng-controller="GameListCtrl">
+	<div class="clearfix">
+		<div class="pull-left item-name"><strong>Player 1</strong></div>
+		<div class="pull-left item-count"><strong>Score 1</strong></div>
+		<div class="pull-left item-name"><strong>Player 2</strong></div>
+		<div class="pull-left item-count"><strong>Score 2</strong></div>
+	</div>
+	<ul ng-repeat="result in results">
+		<li>
+			<div class="leaderboard-item clearfix">
+				<div ng-show="noEdit">
+					<div class="pull-left item-name">{{ result.player1 }}</div>
+					<div class="pull-left item-count">{{ result.score1 }}</div>
+					<div class="pull-left item-name">{{ result.player2 }}</div>
+					<div class="pull-left item-count">{{ result.score2 }}</div>
+					<div><a href="" ng-click="noEdit = !noEdit">Edit</a></div>
+				</div>
+				<div ng-show="!noEdit">
+					<form name="updateGameForm" role="form" novalidate="">
+						<div class="form-group clearfix">
+				        <div class="pull-left item-title" ng-class="{'has-error': updateGameForm.player1[$index].$invalid && submitted}">
+				            <label class="sr-only" for="player1[$index]">{{ result.player1 }}</label>
+				            <input type="text" disabled class="form-control" ng-model="player1[$index]" ng-init="player1[$index]=result.player1" id="player1[$index]" name="player1[$index]" required />
+				        </div>
+				        <div class="pull-left item-count1" ng-class="{'has-error': updateGameForm.score1[$index].$invalid && submitted}">
+				            <label class="sr-only" for="score1[$index]">{{ result.score1 }}</label>
+				            <input type="text" class="form-control" ng-model="score1[$index]" ng-init="score1[$index]=result.score1" id="score1[$index]" name="score1[$index]" required />
+				        </div>
+				        <div class="pull-left item-title" ng-class="{'has-error': updateGameForm.player2[$index].$invalid && submitted}">
+				            <label class="sr-only" for="player2[$index]">{{ result.player2 }}</label>
+				            <input type="text" disabled class="form-control" ng-model="player2[$index]" ng-init="player2[$index]=result.player2" id="player2[$index]" name="player2[$index]" required />
+				        </div>
+				        <div class="pull-left item-count1" ng-class="{'has-error': updateGameForm.score2[$index].$invalid && submitted}">
+				            <label class="sr-only" for="score2">{{ result.score2 }}</label>
+				            <input type="text" class="form-control" ng-model="score2[$index]" ng-init="score2[$index]=result.score2" id="score2[$index]" name="score2[$index]" required />
+				        </div>
+				        <div class="pull-left">
+			            <button type="submit" class="btn btn-primary pull-left" ng-click="updateResult(result._id, $index)">Submit</button>
+			        	</div>
+				    </div>						
+					</form>
+				</div>
+			</div>
+		</li>
+	</ul>
+</div>

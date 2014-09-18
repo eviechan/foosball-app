@@ -1,0 +1,29 @@
+<form name="addGameForm" class="item-list" ng-controller="AddGameCtrl" role="form" novalidate="">
+    <div class="form-group">
+        <div class="col-xs-8" ng-class="{'has-error': addGameForm.player1.$invalid && submitted}">
+            <label class="sr-only" for="player1">Player 1</label>
+            <input type="text" class="form-control" ng-model="player1" id="player1" name="player1" placeholder="Player 1" required />
+        </div>
+        <div class="col-xs-3" ng-class="{'has-error': addGameForm.score1.$invalid && submitted}">
+            <label class="sr-only" for="score1">Score</label>
+            <input type="text" class="form-control" ng-model="score1" id="score1" name="score1" placeholder="Score" required />
+        </div>
+        <div class="clearfix"><!-- clear --></div>
+    </div>
+    <div class="form-group">
+        <div class="col-xs-8" ng-class="{'has-error': addGameForm.player2.$invalid && submitted}">
+            <label class="sr-only" for="player2">Player 2</label>
+            <input type="text" class="form-control" ng-model="player2" id="player2" name="player2" placeholder="Player 2" required />
+        </div>
+        <div class="col-xs-3" ng-class="{'has-error': addGameForm.score2.$invalid && submitted}">
+            <label class="sr-only" for="score2">Score</label>
+            <input type="text" class="form-control" ng-model="score2" id="score2" name="score2" placeholder="Score" required />
+        </div>
+        <div class="clearfix"><!-- clear --></div>
+    </div>
+    <div class="form-group">
+        <div class="col-xs-11">
+            <button type="submit" class="btn btn-primary pull-right col-xs-3" ng-click="submitAddGame()">Submit</button>
+        </div>
+    </div>
+</form>
